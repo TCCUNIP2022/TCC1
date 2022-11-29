@@ -1,0 +1,59 @@
+var translator = new Translator();
+translator.getListOfLanguages(function(languages) {
+    languages.forEach(function(language) {
+        console.log(language.name, langauge.language);
+    });
+});
+var config = {
+    api_key: 'AIzaSyCUmCjvKRb-kOYrnoL2xaXb8I-_JJeKpf0',
+};
+
+translator.getListOfLanguages(function(languages) {
+    languages.forEach(function(language) {
+        console.log(language.name, langauge.language);
+    });
+}, config);
+var config = {
+    from: 'language-of-the-text',
+    to: 'convert-into',
+    api_key: 'AIzaSyCUmCjvKRb-kOYrnoL2xaXb8I-_JJeKpf0', // use your own key
+    callback: function (translatedText) {
+        console.log('translated text', translatedText);
+        
+        // here you can use "speakTextUsingRobot"
+        // see below sections
+    }
+};
+var convertMyVoiceIntoEnglish = 'en-US'; // select any language
+translator.voiceToText(function (text) {
+    console.log('Your voice as text!', text);
+    
+    // here you can use "translateLanguage" method
+    // translator.translateLanguage
+    // see more info in above section
+}, convertMyVoiceIntoEnglish);
+var config = {
+    workerPath: '//cdn.webrtc-experiment.com/Robot-Speaker.js',
+    callback: function (WAV_File) {},
+    amplitude: 100,
+    wordgap: 0,
+    pitch: 50,
+    speed: 175,
+    onSpeakingEnd: function() {},
+    onWorkerFileDownloadStart: function() {},
+    onWorkerFileDownloadEnd: function() {}
+};
+
+translator.speakTextUsingRobot(textToPlay, config);
+translator.speakTextUsingRobot(textToPlay, {
+    callback: function (WAV_File) {
+        HTTP_POST_using_FormData( WAV_File );
+    }
+});
+translator.speakTextUsingGoogleSpeaker({
+    textToSpeak: 'text-to-convert',
+    targetLanguage: 'your-language',
+
+    // Google Translation service's API Key
+    api_key: 'Your-Private-API-Key'
+});
